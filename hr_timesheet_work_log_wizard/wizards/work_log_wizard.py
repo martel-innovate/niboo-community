@@ -14,12 +14,12 @@ class TimesheetWorkLogger(models.TransientModel):
                                default=lambda self: fields.Date.today(),
                                required=True)
     description = fields.Text('Description', required=True)
-    analytic_account_id = fields.Many2one('account.analytic.account', 'Project',
-                                 required=True)
+    analytic_account_id = fields.Many2one('account.analytic.account',
+                                          'Project', required=True)
     task_id = fields.Many2one('project.task', 'Task')
     product_id = fields.Many2one('product.product', 'Product')
 
-    display_task = fields.Boolean('Display task')
+    display_task = fields.Boolean('Display task', default=True)
     display_product = fields.Boolean('Display product')
 
     @api.multi
@@ -36,8 +36,6 @@ class TimesheetWorkLogger(models.TransientModel):
     def display_task_and_product(self):
         self.ensure_one()
         # Do not display selection of task/product if there are none
-        self.display_task = True
-        self.display_product = True
 
         if self.analytic_account_id:
             Task = self.env['project.task']
@@ -52,8 +50,8 @@ class TimesheetWorkLogger(models.TransientModel):
 
             if not task_ids:
                 self.display_task = False
-            if not product_ids:
-                self.display_product = False
+            if product_ids:
+                self.display_product = True
 
     @api.onchange('analytic_account_id')
     def _onchange_analytic_account_id(self):
