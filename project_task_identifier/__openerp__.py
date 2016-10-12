@@ -22,10 +22,13 @@
 {
     'name': 'Project - Task Identifier',
     'category': "Generic Modules/Others",
-    'summary': 'Add a identifier on tasks (project-sequence number)',
-    'website': '',
-    'version': '1.0',
-    'description': """.
+    'summary': 'Add an identifier on tasks (project-sequence number)',
+    'website': 'https://www.niboo.be/',
+    'version': '9.0.1.0.0',
+    'license': 'AGPL-3',
+    'description': """
+        Project Task Identifier allows you to select an identifier for customers.
+        This identifier will be used to generate a unique key for all project tasks related to the customer, making it easier to identify tasks.
         """,
     'author': 'Niboo',
     'depends': ['project'],
@@ -34,6 +37,9 @@
         'views/res_partner_view.xml',
     ],
     'qweb': [],
+    'images': [
+        'static/description/project_task_identifier_cover.png',
+    ],
     'demo': [
     ],
     'css': [
